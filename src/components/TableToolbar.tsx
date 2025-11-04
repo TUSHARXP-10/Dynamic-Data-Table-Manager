@@ -7,7 +7,6 @@ import {
   InputAdornment,
   IconButton,
   Tooltip,
-  useTheme as useMuiTheme,
 } from '@mui/material';
 import {
   Search as SearchIcon,
@@ -28,7 +27,6 @@ interface TableToolbarProps {
 
 export const TableToolbar = ({ onManageColumns }: TableToolbarProps) => {
   const dispatch = useDispatch();
-  const muiTheme = useMuiTheme();
   const { mode, toggleTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -65,7 +63,7 @@ export const TableToolbar = ({ onManageColumns }: TableToolbarProps) => {
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         gap: 2,
-        mb: 3,
+        mb: 4,
         alignItems: { xs: 'stretch', md: 'center' },
       }}
     >
@@ -73,18 +71,32 @@ export const TableToolbar = ({ onManageColumns }: TableToolbarProps) => {
         placeholder="Search all fields..."
         value={searchQuery}
         onChange={handleSearchChange}
-        size="small"
-        sx={{ flex: 1, minWidth: { md: '300px' } }}
+        size="medium"
+        sx={{ 
+          flex: 1, 
+          minWidth: { md: '320px' },
+          '& .MuiOutlinedInput-root': {
+            borderRadius: 'var(--radius)',
+            bgcolor: 'hsl(var(--card))',
+            transition: 'var(--transition-smooth)',
+            '&:hover': {
+              boxShadow: 'var(--shadow-sm)',
+            },
+            '&.Mui-focused': {
+              boxShadow: 'var(--shadow-md)',
+            }
+          }
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon />
+              <SearchIcon sx={{ color: 'hsl(var(--muted-foreground))' }} />
             </InputAdornment>
           ),
         }}
       />
       
-      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+      <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
         <input
           type="file"
           accept=".csv"
@@ -97,6 +109,19 @@ export const TableToolbar = ({ onManageColumns }: TableToolbarProps) => {
           variant="outlined"
           startIcon={<UploadIcon />}
           onClick={() => fileInputRef.current?.click()}
+          sx={{
+            borderRadius: 'var(--radius)',
+            textTransform: 'none',
+            fontWeight: 600,
+            borderColor: 'hsl(var(--border))',
+            color: 'hsl(var(--foreground))',
+            px: 3,
+            '&:hover': {
+              borderColor: 'hsl(var(--primary))',
+              bgcolor: 'hsl(var(--primary) / 0.05)',
+              boxShadow: 'var(--shadow-sm)',
+            }
+          }}
         >
           Import CSV
         </Button>
@@ -105,6 +130,19 @@ export const TableToolbar = ({ onManageColumns }: TableToolbarProps) => {
           variant="outlined"
           startIcon={<DownloadIcon />}
           onClick={handleExport}
+          sx={{
+            borderRadius: 'var(--radius)',
+            textTransform: 'none',
+            fontWeight: 600,
+            borderColor: 'hsl(var(--border))',
+            color: 'hsl(var(--foreground))',
+            px: 3,
+            '&:hover': {
+              borderColor: 'hsl(var(--accent))',
+              bgcolor: 'hsl(var(--accent) / 0.05)',
+              boxShadow: 'var(--shadow-sm)',
+            }
+          }}
         >
           Export CSV
         </Button>
@@ -113,12 +151,38 @@ export const TableToolbar = ({ onManageColumns }: TableToolbarProps) => {
           variant="outlined"
           startIcon={<ViewColumnIcon />}
           onClick={onManageColumns}
+          sx={{
+            borderRadius: 'var(--radius)',
+            textTransform: 'none',
+            fontWeight: 600,
+            borderColor: 'hsl(var(--border))',
+            color: 'hsl(var(--foreground))',
+            px: 3,
+            '&:hover': {
+              borderColor: 'hsl(var(--primary))',
+              bgcolor: 'hsl(var(--primary) / 0.05)',
+              boxShadow: 'var(--shadow-sm)',
+            }
+          }}
         >
           Columns
         </Button>
 
         <Tooltip title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}>
-          <IconButton onClick={toggleTheme} color="primary">
+          <IconButton 
+            onClick={toggleTheme}
+            sx={{
+              borderRadius: 'var(--radius)',
+              border: '1px solid hsl(var(--border))',
+              bgcolor: 'hsl(var(--card))',
+              color: 'hsl(var(--primary))',
+              '&:hover': {
+                bgcolor: 'hsl(var(--primary) / 0.1)',
+                borderColor: 'hsl(var(--primary))',
+                boxShadow: 'var(--shadow-sm)',
+              }
+            }}
+          >
             {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
         </Tooltip>

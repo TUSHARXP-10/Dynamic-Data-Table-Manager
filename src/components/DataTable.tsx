@@ -13,6 +13,7 @@ import {
   TextField,
   Tooltip,
   Box,
+  Chip,
 } from '@mui/material';
 import {
   Edit as EditIcon,
@@ -114,16 +115,45 @@ export const DataTable = () => {
     }
   };
 
+  const getRoleColor = (role: string) => {
+    const colors: Record<string, string> = {
+      'Developer': 'primary',
+      'Designer': 'secondary',
+      'Manager': 'success',
+      'Analyst': 'info',
+    };
+    return colors[role] || 'default';
+  };
+
   return (
-    <Paper elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
+    <Paper 
+      elevation={0} 
+      sx={{ 
+        border: '1px solid',
+        borderColor: 'hsl(var(--border))',
+        borderRadius: 'var(--radius)',
+        overflow: 'hidden',
+        boxShadow: 'var(--shadow-md)',
+      }}
+    >
       <TableContainer>
         <Table>
-          <TableHead sx={{ bgcolor: 'hsl(var(--table-header))' }}>
+          <TableHead 
+            sx={{ 
+              background: 'linear-gradient(135deg, hsl(262 90% 98%), hsl(270 95% 96%))',
+            }}
+          >
             <TableRow>
               {visibleColumns.map(column => (
                 <TableCell
                   key={column!.id}
-                  sx={{ fontWeight: 600, color: 'hsl(var(--foreground))' }}
+                  sx={{ 
+                    fontWeight: 600, 
+                    color: 'hsl(var(--foreground))',
+                    fontSize: '0.875rem',
+                    letterSpacing: '0.025em',
+                    textTransform: 'uppercase',
+                  }}
                 >
                   <Box
                     sx={{
@@ -131,23 +161,41 @@ export const DataTable = () => {
                       alignItems: 'center',
                       cursor: column!.sortable ? 'pointer' : 'default',
                       userSelect: 'none',
+                      gap: 1,
+                      '&:hover': column!.sortable ? {
+                        color: 'hsl(var(--primary))',
+                      } : {},
                     }}
                     onClick={() => column!.sortable && handleSort(column!.id)}
                   >
                     {column!.label}
                     {sortColumn === column!.id && (
-                      <Box sx={{ ml: 1, display: 'flex', alignItems: 'center' }}>
+                      <Box 
+                        sx={{ 
+                          display: 'flex', 
+                          alignItems: 'center',
+                          color: 'hsl(var(--primary))',
+                        }}
+                      >
                         {sortDirection === 'asc' ? (
-                          <ArrowUpward fontSize="small" />
+                          <ArrowUpward sx={{ fontSize: '1rem' }} />
                         ) : (
-                          <ArrowDownward fontSize="small" />
+                          <ArrowDownward sx={{ fontSize: '1rem' }} />
                         )}
                       </Box>
                     )}
                   </Box>
                 </TableCell>
               ))}
-              <TableCell sx={{ fontWeight: 600, color: 'hsl(var(--foreground))' }}>
+              <TableCell 
+                sx={{ 
+                  fontWeight: 600, 
+                  color: 'hsl(var(--foreground))',
+                  fontSize: '0.875rem',
+                  letterSpacing: '0.025em',
+                  textTransform: 'uppercase',
+                }}
+              >
                 Actions
               </TableCell>
             </TableRow>
@@ -161,12 +209,20 @@ export const DataTable = () => {
                 <TableRow
                   key={row.id}
                   sx={{
-                    '&:hover': { bgcolor: 'hsl(var(--table-hover))' },
+                    '&:hover': { 
+                      bgcolor: 'hsl(var(--table-hover))',
+                    },
                     transition: 'var(--transition-smooth)',
                   }}
                 >
                   {visibleColumns.map(column => (
-                    <TableCell key={column!.id}>
+                    <TableCell 
+                      key={column!.id}
+                      sx={{
+                        fontSize: '0.9375rem',
+                        color: 'hsl(var(--foreground))',
+                      }}
+                    >
                       {isEditing ? (
                         <TextField
                           size="small"
@@ -174,6 +230,21 @@ export const DataTable = () => {
                           onChange={(e) => handleFieldChange(column!.id, e.target.value)}
                           type={column!.id === 'age' ? 'number' : 'text'}
                           fullWidth
+                          sx={{
+                            '& .MuiOutlinedInput-root': {
+                              borderRadius: 'var(--radius)',
+                            }
+                          }}
+                        />
+                      ) : column!.id === 'role' ? (
+                        <Chip 
+                          label={displayRow[column!.id]} 
+                          size="small"
+                          color={getRoleColor(displayRow[column!.id] as string) as any}
+                          sx={{ 
+                            fontWeight: 500,
+                            borderRadius: 'var(--radius)',
+                          }}
                         />
                       ) : (
                         displayRow[column!.id]
@@ -181,20 +252,33 @@ export const DataTable = () => {
                     </TableCell>
                   ))}
                   <TableCell>
-                    <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Box sx={{ display: 'flex', gap: 0.5 }}>
                       {isEditing ? (
                         <>
                           <Tooltip title="Save">
                             <IconButton
                               size="small"
                               onClick={handleSave}
-                              sx={{ color: 'hsl(var(--success))' }}
+                              sx={{ 
+                                color: 'hsl(var(--success))',
+                                '&:hover': {
+                                  bgcolor: 'hsl(var(--success) / 0.1)',
+                                }
+                              }}
                             >
                               <SaveIcon fontSize="small" />
                             </IconButton>
                           </Tooltip>
                           <Tooltip title="Cancel">
-                            <IconButton size="small" onClick={handleCancel}>
+                            <IconButton 
+                              size="small" 
+                              onClick={handleCancel}
+                              sx={{
+                                '&:hover': {
+                                  bgcolor: 'hsl(var(--muted))',
+                                }
+                              }}
+                            >
                               <CancelIcon fontSize="small" />
                             </IconButton>
                           </Tooltip>
@@ -205,7 +289,12 @@ export const DataTable = () => {
                             <IconButton
                               size="small"
                               onClick={() => handleEdit(row)}
-                              sx={{ color: 'hsl(var(--primary))' }}
+                              sx={{ 
+                                color: 'hsl(var(--primary))',
+                                '&:hover': {
+                                  bgcolor: 'hsl(var(--primary) / 0.1)',
+                                }
+                              }}
                             >
                               <EditIcon fontSize="small" />
                             </IconButton>
@@ -214,7 +303,12 @@ export const DataTable = () => {
                             <IconButton
                               size="small"
                               onClick={() => handleDelete(row.id)}
-                              sx={{ color: 'hsl(var(--destructive))' }}
+                              sx={{ 
+                                color: 'hsl(var(--destructive))',
+                                '&:hover': {
+                                  bgcolor: 'hsl(var(--destructive) / 0.1)',
+                                }
+                              }}
                             >
                               <DeleteIcon fontSize="small" />
                             </IconButton>
@@ -237,6 +331,10 @@ export const DataTable = () => {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={(e) => dispatch(setRowsPerPage(parseInt(e.target.value, 10)))}
         rowsPerPageOptions={[5, 10, 25, 50]}
+        sx={{
+          borderTop: '1px solid hsl(var(--border))',
+          bgcolor: 'hsl(var(--table-header) / 0.5)',
+        }}
       />
     </Paper>
   );

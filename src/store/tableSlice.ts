@@ -39,18 +39,18 @@ const defaultColumns: Column[] = [
 ];
 
 const sampleData: TableRow[] = [
-  { id: '1', name: 'Alice Johnson', email: 'alice@example.com', age: 28, role: 'Developer' },
-  { id: '2', name: 'Bob Smith', email: 'bob@example.com', age: 34, role: 'Designer' },
-  { id: '3', name: 'Charlie Brown', email: 'charlie@example.com', age: 42, role: 'Manager' },
-  { id: '4', name: 'Diana Prince', email: 'diana@example.com', age: 31, role: 'Developer' },
-  { id: '5', name: 'Ethan Hunt', email: 'ethan@example.com', age: 29, role: 'Analyst' },
-  { id: '6', name: 'Fiona Apple', email: 'fiona@example.com', age: 36, role: 'Designer' },
-  { id: '7', name: 'George Wilson', email: 'george@example.com', age: 45, role: 'Manager' },
-  { id: '8', name: 'Hannah Montana', email: 'hannah@example.com', age: 27, role: 'Developer' },
-  { id: '9', name: 'Ian Malcolm', email: 'ian@example.com', age: 52, role: 'Analyst' },
-  { id: '10', name: 'Julia Roberts', email: 'julia@example.com', age: 39, role: 'Designer' },
-  { id: '11', name: 'Kevin Hart', email: 'kevin@example.com', age: 33, role: 'Developer' },
-  { id: '12', name: 'Laura Croft', email: 'laura@example.com', age: 30, role: 'Manager' },
+  { id: '1', name: 'Priya Sharma', email: 'priya.sharma@example.com', age: 28, role: 'Developer' },
+  { id: '2', name: 'Rahul Patel', email: 'rahul.patel@example.com', age: 34, role: 'Designer' },
+  { id: '3', name: 'Anjali Verma', email: 'anjali.verma@example.com', age: 42, role: 'Manager' },
+  { id: '4', name: 'Arjun Singh', email: 'arjun.singh@example.com', age: 31, role: 'Developer' },
+  { id: '5', name: 'Sneha Reddy', email: 'sneha.reddy@example.com', age: 29, role: 'Analyst' },
+  { id: '6', name: 'Vikram Kumar', email: 'vikram.kumar@example.com', age: 36, role: 'Designer' },
+  { id: '7', name: 'Kavya Gupta', email: 'kavya.gupta@example.com', age: 45, role: 'Manager' },
+  { id: '8', name: 'Rohan Mehta', email: 'rohan.mehta@example.com', age: 27, role: 'Developer' },
+  { id: '9', name: 'Divya Nair', email: 'divya.nair@example.com', age: 38, role: 'Analyst' },
+  { id: '10', name: 'Aditya Joshi', email: 'aditya.joshi@example.com', age: 39, role: 'Designer' },
+  { id: '11', name: 'Neha Desai', email: 'neha.desai@example.com', age: 33, role: 'Developer' },
+  { id: '12', name: 'Karthik Iyer', email: 'karthik.iyer@example.com', age: 30, role: 'Manager' },
 ];
 
 const initialState: TableState = {

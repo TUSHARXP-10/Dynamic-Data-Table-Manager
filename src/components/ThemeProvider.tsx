@@ -40,18 +40,56 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     palette: {
       mode,
       primary: {
-        main: 'hsl(221, 83%, 53%)',
+        main: 'hsl(262, 83%, 58%)',
+      },
+      secondary: {
+        main: 'hsl(270, 95%, 96%)',
+      },
+      success: {
+        main: 'hsl(142, 76%, 36%)',
+      },
+      info: {
+        main: 'hsl(172, 66%, 50%)',
       },
       background: {
-        default: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(222, 47%, 11%)',
-        paper: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(217, 33%, 17%)',
+        default: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(240, 10%, 3.9%)',
+        paper: mode === 'light' ? 'hsl(0, 0%, 100%)' : 'hsl(240, 10%, 8%)',
+      },
+      text: {
+        primary: mode === 'light' ? 'hsl(240, 10%, 3.9%)' : 'hsl(0, 0%, 98%)',
+        secondary: mode === 'light' ? 'hsl(240, 4%, 46%)' : 'hsl(240, 5%, 65%)',
       },
     },
     typography: {
-      fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+      fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+      h3: {
+        fontWeight: 700,
+      },
+      h6: {
+        fontWeight: 400,
+      },
     },
     shape: {
-      borderRadius: 8,
+      borderRadius: 12,
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
+            fontWeight: 600,
+            borderRadius: '12px',
+            padding: '10px 24px',
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            fontWeight: 500,
+          },
+        },
+      },
     },
   });
 
