@@ -282,9 +282,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions, suggestions, or support:
 
-- **Email**: your-email@example.com
+- **Email**: tusharchandane8@gmail.com
 - **GitHub Issues**: [Create an issue](https://github.com/TUSHARXP-10/Dynamic-Data-Table-Manager/issues)
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
+-
 
 ---
 
